@@ -127,56 +127,40 @@ function buildCharts(sample) {
  
 
     // 4. Create the trace for the gauge chart.
-   let level = parseFloat(wfreq) * 20;
-   var gaugeData = [{
-     type: "indicator",
-     mode: "gauge+number",
-     value: 'level',
-     title: {text: 'Bellyt Button Bacteria Gauge Chart'},
-     gauge: {
-       axis: {range: [null, 10], tickwidth: 1, tickcolor: "darkblue"},
-       bar: {color: "darkblue"},
-       bgcolor: "white",
-       borderwidth: 2,
-       bordercolor: "gray",
-     }
-
-   }
-  ];
+    var gaugeData = [
+      {
+       domain: { x: [0,1], y: [0,1] },
+       value: frequency,
+       title: {text: '<b>Belly Button Washing Frequency</b> <br>Scrubs per Week'},
+       type: "indicator",
+       mode: "gauge+number",
+       gauge: {
+         axis: { range:[0,10], tickcolor: "black", tickermode: "array"},
+         bar: {color: "black" },
+         bgcolor: "white",
+         borderwidth: 1,
+         bordercolor: "dimgrat",
+         steps: [
+           { range: [0,2], color: "rgba(14, 127, 0, .5)" },
+           { range: [2,4], color: "rgba(110, 154, 22, .5)" },
+           { range: [4,6], color: "rgba(170, 202, 42, .5)" },
+           { range: [6,8], color: "rgba(202, 209, 95, .5)" }
+         ],
+       }
+      }
+     ];
   
     // 5. Create the layout for the gauge chart.
     var gaugeLayout = { 
-      shapes: [
-        {
-          type: "path",
-        
-          fillcolor: "850000",
-          line: {
-            color: "850000"
-          }
-        }
-      ],
-      title: "Belly Button Washing Frequency <br> Scrubs per Week",
-      height: 500,
-      width: 500,
-      xaxis: {
-        zeroline:false,
-        showticklabels: false,
-        showgrid: false,
-        range: [-1, 1]
-      },
-      yaxis: {
-        zeroline: false,
-        showticklabels: false,
-        showgrid: false,
-        range: [-1, 1]
-      }
-    };
+      plot_bgcolor: 'rgba(0, 0, 0, 0)',
+      paper_bgcolor: 'rgba(0, 0, 0, 0)',
+      font:{ color: "black"}
+      };
       
   
  
    // 6. Use Plotly to plot the gauge data and layout.
-    Plotly.newPlot("gauge", gaugeData, guageLayout);
+    Plotly.newPlot('gauge', gaugeData, guageLayout, {responsive: true});
   });
 }
 
